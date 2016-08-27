@@ -1,0 +1,16 @@
+consul {
+    # The address to the Consul agent.
+    address = "{{ nomad_consul_server }}:{{ nomad_consul_port }}"
+    address = "127.0.0.1:8500"
+
+    # The service name to register the server and client with Consul.
+    server_service_name = "{{ nomad_consul_server_service_name }}"
+    client_service_name = "{{ nomad_consul_client_service_name }}"
+
+    # Enables automatically registering the services.
+    auto_advertise = {{ "true" if nomad_consul_auto_advertise else "false" }}
+
+    # Enabling the server and client to bootstrap using Consul.
+    server_auto_join = {{ "true" if nomad_consul_server_auto_join else "false" }}
+    client_auto_join = {{ "true" if nomad_consul_client_auto_join else "false" }}
+}
