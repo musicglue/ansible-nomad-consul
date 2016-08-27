@@ -23,6 +23,12 @@ client {
 {% if nomad_client_node_class and nomad_client %}
   node_class = "{{ nomad_client_node_class }}"
 {% endif %}
+{% if nomad_client_network_interface and nomad_client %}
+  network_interface = "{{ nomad_client_network_interface }}"
+{% endif %}
+{% if nomad_client_network_speed and nomad_client %}
+  network_speed = {{ nomad_client_network_speed }}
+{% endif %}
 {% if nomad_client_meta and nomad_client %}
   meta {
 {% for meta in nomad_client %}

@@ -51,6 +51,8 @@ nomad_client_servers: []
 nomad_client_node_id: ''
 nomad_client_node_class: ''
 nomad_client_meta: {}
+nomad_client_network_interface:
+nomad_client_network_speed: 100
 
 nomad_atlas_infrastructure: ''
 nomad_atlas_token: ''
