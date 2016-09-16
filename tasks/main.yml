@@ -54,15 +54,11 @@
     state=directory
   tags: nomad
 
-- name: Create Nomad upstart configuration
-  template: >
-    src=nomad.conf.j2
-    dest=/etc/init/nomad.conf
-    owner=root
-    group=root
-    mode=0644
-  notify: restart nomad
-  tags: nomad
+- include: upstart.yml
+  when: ansible_release_distribution == 'trusty'
+
+- include: systemd.yml
+  when: ansible_release_distribution == 'xenial'
 
 - name: Create Nomad configuration file
   template: >
@@ -121,3 +117,12 @@
 - name: Ensure Nomad service is started and enabled on boot
   service: name={{ nomad_service_name }} state=started enabled=yes
   tags: nomad
+  when: ansible_release_distribution == 'trusty'
+
+- name: Ensure Nomad systemd service is enabled on boot
+  command: systemctl enable nomad.service
+  when: ansible_release_distribution == 'xenial'
+
+- name: Ensure Nomad systemd service is started
+  command: systemctl start nomad.service
+  when: ansible_release_distribution == 'xenial'

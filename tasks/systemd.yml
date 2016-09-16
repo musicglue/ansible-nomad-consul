@@ -1,0 +1,12 @@
+---
+- name: Create Nomad systemd configuration
+  template: >
+    src=nomad.service.j2
+    dest=/lib/systemd/system/nomad.service
+    owner=root
+    group=root
+    mode=0644
+  notify: restart nomad
+  tags: nomad
+
+

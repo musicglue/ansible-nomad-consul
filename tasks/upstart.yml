@@ -1,0 +1,11 @@
+---
+- name: Create Nomad upstart configuration
+  template: >
+    src=nomad.conf.j2
+    dest=/etc/init/nomad.conf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart nomad
+  tags: nomad
+

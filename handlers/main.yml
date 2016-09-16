@@ -1,4 +1,8 @@
 ---
+- name: reload systemd
+  become: yes
+  command: systemctl daemon-reload
+
 - name: restart nomad
   service: name={{ nomad_service_name }} state=restarted
   tags: nomad

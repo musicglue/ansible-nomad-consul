@@ -1,0 +1,19 @@
+[Unit]
+Description=Nomad
+Documentation=https://nomadproject.io/docs/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Environment="GOMAXPROCS=`nproc`"
+Restart=on-failure
+User={{ nomad_user }}
+Group={{ nomad_group }}
+PIDFile={{ nomad_pid_file }}
+ExecStart={{ nomad_install_dir }}/nomad agent -{{ 'server' if nomad_server else 'client' }} -config={{ nomad_config_dir }}
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
