@@ -55,10 +55,10 @@
   tags: nomad
 
 - include: upstart.yml
-  when: ansible_release_distribution == 'trusty'
+  when: ansible_distribution_release == 'trusty'
 
 - include: systemd.yml
-  when: ansible_release_distribution == 'xenial'
+  when: ansible_distribution_release == 'xenial'
 
 - name: Create Nomad configuration file
   template: >
@@ -117,12 +117,12 @@
 - name: Ensure Nomad service is started and enabled on boot
   service: name={{ nomad_service_name }} state=started enabled=yes
   tags: nomad
-  when: ansible_release_distribution == 'trusty'
+  when: ansible_distribution_release == 'trusty'
 
 - name: Ensure Nomad systemd service is enabled on boot
   command: systemctl enable nomad.service
-  when: ansible_release_distribution == 'xenial'
+  when: ansible_distribution_release == 'xenial'
 
 - name: Ensure Nomad systemd service is started
   command: systemctl start nomad.service
-  when: ansible_release_distribution == 'xenial'
+  when: ansible_distribution_release == 'xenial'
