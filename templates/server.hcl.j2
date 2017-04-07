@@ -60,4 +60,8 @@ server {
 {% endfor %}
   ]
 {% endif %}
+# right way!
+{% for key, value in nomad_server_config.iteritems() %}
+  {{ key }} = "{{ value }}"
+{% endfor %}
 }
