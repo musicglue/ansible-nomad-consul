@@ -9,3 +9,4 @@ nomad_log_file: /var/log/nomad.log
 nomad_user: "{% if nomad_server %}nomad{% else %}root{% endif %}"
 nomad_group: "{% if nomad_server %}nomad{% else %}root{% endif %}"
 nomad_service_name: nomad
+nomad_server_config: {}
